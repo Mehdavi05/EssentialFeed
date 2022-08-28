@@ -163,14 +163,28 @@ class RemoteFeedLoaderTests: XCTestCase {
         return try! JSONSerialization.data(withJSONObject: json)
     }
     
-    private func expect(_ sut:RemoteFeedLoader, toCompleteWith result: RemoteFeedLoader.Result, when action: ()->Void ,  file: StaticString = #filePath, line: UInt = #line) {
+    private func expect(_ sut:RemoteFeedLoader, toCompleteWith expectedResults: RemoteFeedLoader.Result, when action: ()->Void ,  file: StaticString = #filePath, line: UInt = #line) {
         
-        var capturedResults = [RemoteFeedLoader.Result]()
-        sut.load() {capturedResults.append($0)}
+        let exp = expectation(description: "Wait for the results")
+        
+        sut.load() {receivedResults in
+            switch (receivedResults, expectedResults) {
+            case let (.success(receivedItems), .success(extectedItems)):
+                XCTAssertEqual(receivedItems, extectedItems, file: file, line: line)
+                break
+                
+            case let (.failure(receivedError), .failure(expectedError)):
+                XCTAssertEqual(receivedError, expectedError, file: file, line: line)
+                break
+            default:
+                XCTFail("Expected result \(expectedResults) got \(receivedResults)", file: file, line: line)
+            }
+            exp.fulfill()
+        }
         
         action()
         
-        XCTAssertEqual(capturedResults, [result], file: file, line: line)
+        wait(for: [exp], timeout: 1.0)
     }
     
     private func makeSUT(url:URL = URL(string: "https://any_test_url")!) -> (sut: RemoteFeedLoader, client: HTTPClientSpy) {
