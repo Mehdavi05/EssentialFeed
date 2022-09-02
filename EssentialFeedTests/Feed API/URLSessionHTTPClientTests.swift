@@ -20,7 +20,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         URLProtocolStub.stopInterceptingRequests()
     }
     
-    func test_getFromURL_performsGETRequestFromURL() {
+    func test_getFromURL_performsGETRequestWithURL() {
         
         let url = anyURL()
         
