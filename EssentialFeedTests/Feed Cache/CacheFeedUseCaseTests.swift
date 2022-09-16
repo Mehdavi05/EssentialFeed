@@ -17,20 +17,18 @@ class CacheFeedUseCaseTests: XCTestCase {
     }
     
     func test_save_requestCacheDeletion() {
-        let items = [uniqueItem(), uniqueItem()]
         let (sut, store) = makeSUT()
 
-        sut.save(items){ _ in }
+        sut.save(uniqueItems().models){ _ in }
         
         XCTAssertEqual(store.receivedMessages, [.deleteCachedFeed])
     }
     
     func test_save_doesNotRequestCacheInsertionOnDeletionError() {
         let (sut, store) = makeSUT()
-        let items = [uniqueItem(), uniqueItem()]
         let deletionError = anyError()
         
-        sut.save(items){ _ in }
+        sut.save(uniqueItems().models){ _ in }
         
         store.completeDeletion(with: deletionError)
         
@@ -40,8 +38,7 @@ class CacheFeedUseCaseTests: XCTestCase {
     func test_save_requestsNewCacheInsertionWithTimestampOnSuccessfulDeletion() {
         let timestamp = Date()
         let (sut, store) = makeSUT(currentDate:{ timestamp })
-        let items = [uniqueItem(), uniqueItem()]
-        let localFeedItems = items.map{LocalFeedItem(id: $0.id, description: $0.description, location: $0.location, imageURL: $0.imageURL)}
+        let (items, localFeedItems) = uniqueItems()
         sut.save(items){ _ in }
         
         store.completeDeletionSuccessfully()
@@ -153,7 +150,7 @@ class CacheFeedUseCaseTests: XCTestCase {
         let exp = expectation(description: "Wait for save completion")
         
         var receivedError: Error?
-        sut.save([uniqueItem()]) { error in
+        sut.save(uniqueItems().models) { error in
             receivedError = error
             exp.fulfill()
         }
@@ -177,6 +174,12 @@ class CacheFeedUseCaseTests: XCTestCase {
         return FeedItem(id: UUID(), description: "Any", location: "Any", imageURL: anyURL())
     }
     
+    private func uniqueItems() -> (models:[FeedItem], local:[LocalFeedItem]) {
+        let items = [uniqueItem(), uniqueItem()]
+        let localFeedItems = items.map{LocalFeedItem(id: $0.id, description: $0.description, location: $0.location, imageURL: $0.imageURL)}
+        
+        return(items, localFeedItems)
+    }
     private func anyURL() -> URL {
         return URL(string: "https://any_url.com")!
     }
