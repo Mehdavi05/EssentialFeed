@@ -141,6 +141,7 @@ class CacheFeedUseCaseTests: XCTestCase {
         
         return(feed, localImageFeed)
     }
+    
     private func anyURL() -> URL {
         return URL(string: "https://any_url.com")!
     }
