@@ -1,0 +1,10 @@
+workflows:
+    EssentialFeedFull-workflow:
+        name: EssentialFeedFull Pipeline
+        scripts:
+          - name: CICD Started
+            script: echo "Welcome to your CICD set up"
+        publishing:
+         email:
+          recipients:
+           - shujaat.apple05@gmail.com
