@@ -71,7 +71,7 @@ class RemoteFeedLoaderTests : XCTestCase {
         let (sut, client) = makeSUT()
         
         expect(sut: sut, toCompleteWithResult: .success([])) {
-            let emptyJsonList = Data("{\"items:\":[]}".utf8)
+            let emptyJsonList = Data("{\"items\":[]}".utf8)
             client.complete(withStatusCode: 200, data: emptyJsonList)
         }
     }
@@ -84,7 +84,7 @@ class RemoteFeedLoaderTests : XCTestCase {
         return (sut, client)
     }
     
-    private func expect(sut: RemoteFeedLoader, toCompleteWithResult result: RemoteFeedLoader.Result, when action:()->Void)
+    private func expect(sut: RemoteFeedLoader, toCompleteWithResult result: RemoteFeedLoader.Result, when action:() -> Void, file: StaticString = #file, line: UInt = #line)
     {
         var capturedResults: [RemoteFeedLoader.Result] = []
         
@@ -92,33 +92,32 @@ class RemoteFeedLoaderTests : XCTestCase {
         
         action()
         
-        XCTAssertEqual(capturedResults, [result])
+        XCTAssertEqual(capturedResults, [result], file: file, line: line)
     }
     
-    class HTTPClientSpy: HTTPClient {
-        var messages:[(url: URL, completion: (HTTPClientResult) -> Void)] = []
-        
-        var requestedURLs: [URL] {
-            return messages.map{ $0.url }
-        }
-        
-        func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void) {
-            messages.append((url, completion))
-        }
-        
-        func complete(with error: Error, at index: Int = 0) {
-            messages[index].completion(.failure(error))
-        }
-        
-        func complete(withStatusCode code: Int, data: Data = Data() ,at index: Int = 0)
-        {
-            let response = HTTPURLResponse(
-                            url: requestedURLs[index],
-                            statusCode: code,
-                            httpVersion: nil,
-                            headerFields: nil
-                        )!
-            messages[index].completion(.success(data, response))
-        }
+class HTTPClientSpy: HTTPClient {
+    var messages:[(url: URL, completion: (HTTPClientResult) -> Void)] = []
+    
+    var requestedURLs: [URL] {
+        return messages.map{ $0.url }
+    }
+    
+    func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void) {
+        messages.append((url, completion))
+    }
+    
+    func complete(with error: Error, at index: Int = 0) {
+        messages[index].completion(.failure(error))
+    }
+    
+    func complete(withStatusCode code: Int, data: Data = Data() ,at index: Int = 0)
+    {
+        let response = HTTPURLResponse(
+            url: requestedURLs[index],
+            statusCode: code,
+            httpVersion: nil,
+            headerFields: nil
+        )!
+        messages[index].completion(.success(data, response))
     }
 }
