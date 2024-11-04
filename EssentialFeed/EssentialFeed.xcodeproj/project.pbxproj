@@ -23,8 +23,17 @@
 /* Begin PBXFileReference section */
 		E0740F6E2CC8072100C3F636 /* EssentialFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EssentialFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0740F782CC8072200C3F636 /* EssentialFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E0F66D1E2CD81F7900DD1A1C /* EssentialFeed+Random+CodeCoverage.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "EssentialFeed+Random+CodeCoverage.xctestplan"; path = "TestPlans/EssentialFeed+Random+CodeCoverage.xctestplan"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E0F66D202CD8A98D00DD1A1C /* Exceptions for "EssentialFeedTests" folder in "EssentialFeedTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"TestPlans/EssentialFeed+Random+CodeCoverage.xctestplan",
+			);
+			target = E0740F772CC8072200C3F636 /* EssentialFeedTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E0740F702CC8072100C3F636 /* EssentialFeed */ = {
@@ -34,6 +43,9 @@
 		};
 		E0740F7C2CC8072200C3F636 /* EssentialFeedTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E0F66D202CD8A98D00DD1A1C /* Exceptions for "EssentialFeedTests" folder in "EssentialFeedTests" target */,
+			);
 			path = EssentialFeedTests;
 			sourceTree = "<group>";
 		};
@@ -61,7 +73,6 @@
 		E0740F642CC8072100C3F636 = {
 			isa = PBXGroup;
 			children = (
-				E0F66D1E2CD81F7900DD1A1C /* EssentialFeed+Random+CodeCoverage.xctestplan */,
 				E0740F702CC8072100C3F636 /* EssentialFeed */,
 				E0740F7C2CC8072200C3F636 /* EssentialFeedTests */,
 				E0740F6F2CC8072100C3F636 /* Products */,
