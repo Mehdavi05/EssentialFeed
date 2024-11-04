@@ -38,6 +38,7 @@
 		E0F66D202CD8A98D00DD1A1C /* Exceptions for "EssentialFeedTests" folder in "EssentialFeedTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"TestPlans/APIEndToEnd+UnitTests.xctestplan",
 				"TestPlans/EssentialFeed+Random+CodeCoverage.xctestplan",
 			);
 			target = E0740F772CC8072200C3F636 /* EssentialFeedTests */;
