@@ -52,6 +52,7 @@
 		E09A9FBA2CDBF9CE000B0D06 /* EssentialFeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EssentialFeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E09A9FC32CDBF9CE000B0D06 /* EssentialFeediOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeediOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E09A9FD32CDBFAA2000B0D06 /* EssentialFeediOS.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = EssentialFeediOS.xctestplan; path = EssentialFeediOSTests/TestPlans/EssentialFeediOS.xctestplan; sourceTree = "<group>"; };
+		E09A9FD62CDBFCEB000B0D06 /* CI_iOS.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = CI_iOS.xctestplan; path = EssentialFeediOSTests/TestPlans/CI_iOS.xctestplan; sourceTree = "<group>"; };
 		E0F66D262CD8AB4600DD1A1C /* EssentialFeedAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeedAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F66D3D2CD8B3A400DD1A1C /* APIEndToEnd+UnitTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "APIEndToEnd+UnitTests.xctestplan"; sourceTree = "<group>"; };
 		E0F66E0D2CDB501E00DD1A1C /* EssentialFeedCacheIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeedCacheIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,6 +174,7 @@
 				E0F66E172CDB506F00DD1A1C /* EssentialFeedCacheIntegrationTests.xctestplan */,
 				E09A9FB32CDBF629000B0D06 /* EssentialFeed+Random+CodeCoverage.xctestplan */,
 				E0F66D3D2CD8B3A400DD1A1C /* APIEndToEnd+UnitTests.xctestplan */,
+				E09A9FD62CDBFCEB000B0D06 /* CI_iOS.xctestplan */,
 				E0740F702CC8072100C3F636 /* EssentialFeed */,
 				E0740F7C2CC8072200C3F636 /* EssentialFeedTests */,
 				E0F66D272CD8AB4600DD1A1C /* EssentialFeedAPIEndToEndTests */,
