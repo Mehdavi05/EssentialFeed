@@ -30,7 +30,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:TestPlans/EssentialFeed+Random+CodeCoverage.xctestplan"
+            reference = "container:../EssentialFeed+Random+CodeCoverage.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>

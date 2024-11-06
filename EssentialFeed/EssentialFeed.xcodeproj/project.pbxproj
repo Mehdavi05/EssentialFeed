@@ -39,6 +39,7 @@
 /* Begin PBXFileReference section */
 		E0740F6E2CC8072100C3F636 /* EssentialFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EssentialFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0740F782CC8072200C3F636 /* EssentialFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E09A9FB32CDBF629000B0D06 /* EssentialFeed+Random+CodeCoverage.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "EssentialFeed+Random+CodeCoverage.xctestplan"; path = "../EssentialFeed+Random+CodeCoverage.xctestplan"; sourceTree = "<group>"; };
 		E0F66D262CD8AB4600DD1A1C /* EssentialFeedAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeedAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F66D3D2CD8B3A400DD1A1C /* APIEndToEnd+UnitTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "APIEndToEnd+UnitTests.xctestplan"; sourceTree = "<group>"; };
 		E0F66E0D2CDB501E00DD1A1C /* EssentialFeedCacheIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeedCacheIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,13 +47,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		E0F66D202CD8A98D00DD1A1C /* Exceptions for "EssentialFeedTests" folder in "EssentialFeedTests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"TestPlans/EssentialFeed+Random+CodeCoverage.xctestplan",
-			);
-			target = E0740F772CC8072200C3F636 /* EssentialFeedTests */;
-		};
 		E0F66D312CD8AE1600DD1A1C /* Exceptions for "EssentialFeedTests" folder in "EssentialFeedAPIEndToEndTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -81,7 +75,6 @@
 		E0740F7C2CC8072200C3F636 /* EssentialFeedTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				E0F66D202CD8A98D00DD1A1C /* Exceptions for "EssentialFeedTests" folder in "EssentialFeedTests" target */,
 				E0F66D312CD8AE1600DD1A1C /* Exceptions for "EssentialFeedTests" folder in "EssentialFeedAPIEndToEndTests" target */,
 				E0F66E192CDB523E00DD1A1C /* Exceptions for "EssentialFeedTests" folder in "EssentialFeedCacheIntegrationTests" target */,
 			);
@@ -139,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				E0F66E172CDB506F00DD1A1C /* EssentialFeedCacheIntegrationTests.xctestplan */,
+				E09A9FB32CDBF629000B0D06 /* EssentialFeed+Random+CodeCoverage.xctestplan */,
 				E0F66D3D2CD8B3A400DD1A1C /* APIEndToEnd+UnitTests.xctestplan */,
 				E0740F702CC8072100C3F636 /* EssentialFeed */,
 				E0740F7C2CC8072200C3F636 /* EssentialFeedTests */,
@@ -422,6 +416,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shujaat.wemo.EssentialFeed;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -459,6 +454,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shujaat.wemo.EssentialFeed;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_INSTALL_OBJC_HEADER = NO;
 				SWIFT_VERSION = 5.0;
@@ -602,6 +598,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shujaat.wemo.EssentialFeedTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 			};
@@ -618,6 +615,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.shujaat.wemo.EssentialFeedTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 			};
