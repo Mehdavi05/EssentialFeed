@@ -9,22 +9,17 @@ import Foundation
 import EssentialFeed
 
 class FeedStoreSpy: FeedStore {
-    typealias DeletionCompletion = (Error?) -> Void
-    typealias InsertionCompletion = (Error?) -> Void
-    private var retrievalCompletions = [RetrievalCompletion]()
-
-    
     enum ReceivedMessage: Equatable {
-        case deleteCachedFeed
-        case insert([LocalFeedImage], Date)
-        case retrieve
-    }
+            case deleteCachedFeed
+            case insert([LocalFeedImage], Date)
+            case retrieve
+        }
     
     private(set) var receivedMessages = [ReceivedMessage]()
-
     
     private var deletionCompletions = [DeletionCompletion]()
     private var insertionCompletions = [InsertionCompletion]()
+    private var retrievalCompletions = [RetrievalCompletion]()
     
     func deleteCachedFeed(completion: @escaping DeletionCompletion) {
         deletionCompletions.append(completion)
@@ -32,12 +27,12 @@ class FeedStoreSpy: FeedStore {
     }
     
     func completeDeletion(with error: Error, at index: Int = 0) {
-        deletionCompletions[index](error)
+        deletionCompletions[index](.failure(error))
     }
         
     func completeDeletionSuccessfully(at index: Int = 0) {
-            deletionCompletions[index](nil)
-        }
+        deletionCompletions[index](.success(()))
+    }
     
     func insert(_ items: [LocalFeedImage], timestamp: Date, completion: @escaping InsertionCompletion) {
         insertionCompletions.append(completion)
@@ -45,11 +40,11 @@ class FeedStoreSpy: FeedStore {
     }
     
     func completeInsertion(with error: Error, at index: Int = 0) {
-        insertionCompletions[index](error)
+        insertionCompletions[index](.failure(error))
     }
     
     func completeInsertionSuccessfully(at index: Int = 0) {
-        insertionCompletions[index](nil)
+        insertionCompletions[index](.success(()))
     }
     
     func retrieve(completion: @escaping RetrievalCompletion) {
