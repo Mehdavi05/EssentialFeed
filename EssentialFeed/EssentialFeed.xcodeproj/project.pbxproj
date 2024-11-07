@@ -189,6 +189,7 @@
 				E0F66E0E2CDB501E00DD1A1C /* EssentialFeedCacheIntegrationTests */,
 				E09A9FBB2CDBF9CE000B0D06 /* EssentialFeediOS */,
 				E09A9FC72CDBF9CE000B0D06 /* EssentialFeediOSTests */,
+				E09AA0492CDC790D000B0D06 /* Frameworks */,
 				E0740F6F2CC8072100C3F636 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -204,6 +205,13 @@
 				E09A9FC32CDBF9CE000B0D06 /* EssentialFeediOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E09AA0492CDC790D000B0D06 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
