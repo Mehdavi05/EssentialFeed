@@ -156,6 +156,37 @@ final class FeedViewControllerTests: XCTestCase {
         XCTAssertEqual(view1?.isShowingImageLoadingIndicator, false, "Expected no loading indicator for second view once second image loading completes with error")
     }
     
+    func test_feedImageView_rendersImageLoadedFromURL() {
+        let (sut, loader) = makeSUT()
+        
+        let window = UIWindow()
+        window.rootViewController = sut
+        window.makeKeyAndVisible()
+        window.layoutIfNeeded()
+        loader.completeFeedLoading(with: [makeImage(), makeImage()])
+        
+        let view0 = sut.simulateFeedImageViewVisible(at: 0)
+        let view1 = sut.simulateFeedImageViewVisible(at: 1)
+        XCTAssertEqual(view0?.renderedImage, .none, "Expected no image for first view while loading first image")
+        XCTAssertEqual(view1?.renderedImage, .none, "Expected no image for second view while loading second image")
+        
+        //XCTAssertEqual failed: ("Optional(248 bytes)") is not equal to ("Optional(236 bytes)") - Expected image for first view once first image loading completes successfully. -> Using make method
+        //let imageData0 = UIImage.make(withColor: .red).pngData()!
+        let pathImage0 = Bundle(for: type(of: self)).path(forResource: "elephant-image-0", ofType: "jpg")!
+        let imageData0 = UIImage(named: pathImage0)!.pngData()!
+        loader.completeImageLoading(with: imageData0, at: 0)
+        XCTAssertEqual(view0?.renderedImage, imageData0, "Expected image for first view once first image loading completes successfully")
+        XCTAssertEqual(view1?.renderedImage, .none, "Expected no image state change for second view once first image loading completes successfully")
+        
+        //XCTAssertEqual failed: ("Optional(248 bytes)") is not equal to ("Optional(236 bytes)") - Expected image for first view once first image loading completes successfully. -> Using make method
+        //let imageData1 = UIImage.make(withColor: .blue).pngData()!
+        let pathImage1 = Bundle(for: type(of: self)).path(forResource: "elephant-image-1", ofType: "jpg")!
+        let imageData1 = UIImage(named: pathImage0)!.pngData()!
+        loader.completeImageLoading(with: imageData1, at: 1)
+        XCTAssertEqual(view0?.renderedImage, imageData0, "Expected no image state change for first view once second image loading completes successfully")
+        XCTAssertEqual(view1?.renderedImage, imageData1, "Expected image for second view once second image loading completes successfully")
+    }
+    
     // MARK: - Helpers
 
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: FeedViewController, loader: LoaderSpy) {
@@ -239,7 +270,7 @@ final class FeedViewControllerTests: XCTestCase {
             return TaskSpy { [weak self] in self?.cancelledImageURLs.append(url) }
         }
         
-        func completeImageLoading(with imageData: Data = Data(), at index: Int = 0) {
+        func completeImageLoading(with imageData:Data = Data(), at index: Int = 0) {
             imageRequests[index].completion(.success(imageData))
         }
         
@@ -303,6 +334,10 @@ private extension FeedImageCell {
     var descriptionText: String? {
         return descriptionLabel.text
     }
+    
+    var renderedImage: Data? {
+        return feedImageView.image?.pngData()
+    }
 }
 
 private extension UIRefreshControl {
@@ -312,5 +347,18 @@ private extension UIRefreshControl {
                 (target as NSObject).perform(Selector($0))
             }
         }
+    }
+}
+
+private extension UIImage {
+    static func make(withColor color: UIColor) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()!
+        context.setFillColor(color.cgColor)
+        context.fill(rect)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return img!
     }
 }

@@ -22,6 +22,7 @@ final public class FeedViewController: UITableViewController {
     private var imageLoader: FeedImageDataLoader?
     private var tableModel = [FeedImage]()
     private var tasks = [IndexPath: FeedImageDataLoaderTask]()
+    private var onViewIsAppearing: ((UITableViewController) -> Void)?
 
     public convenience init(feedLoader: FeedLoader, imageLoader: FeedImageDataLoader) {
         self.init()
@@ -31,7 +32,7 @@ final public class FeedViewController: UITableViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(load), for: .valueChanged)
     }
@@ -62,10 +63,14 @@ final public class FeedViewController: UITableViewController {
         cell.locationContainer.isHidden = (cellModel.location == nil)
         cell.locationLabel.text = cellModel.location
         cell.descriptionLabel.text = cellModel.description
+        cell.feedImageView.image = nil
         cell.feedImageContainer.startShimmering()
         tasks[indexPath] = imageLoader?.loadImageData(from: cellModel.url) { [weak cell] result in
+            let data = try? result.get()
+            cell?.feedImageView.image = data.map(UIImage.init) ?? nil
             cell?.feedImageContainer.stopShimmering()
         }
+        
         return cell
     }
     
