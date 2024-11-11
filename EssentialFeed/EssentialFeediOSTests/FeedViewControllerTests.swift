@@ -20,10 +20,8 @@ final class FeedViewControllerTests: XCTestCase {
          This forces the window and its views to layout immediately. In testing, this is essential to ensure that the view controller's view and its subviews are fully
          laid out before any assertions. It synchronizes layout updates, so you can reliably inspect the view’s frame, bounds, or other properties.
          */
-        let window = UIWindow()
-        window.rootViewController = sut
-        window.makeKeyAndVisible()
-        window.layoutIfNeeded()
+        setWindowsRootViewController(sut)
+
         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
         
         sut.simulateUserInitiatedFeedReload()
@@ -41,11 +39,9 @@ final class FeedViewControllerTests: XCTestCase {
 
     func test_loadingFeedIndicator_isVisibleWhileLoadingFeed() {
         let (sut, loader) = makeSUT()
-
-        let window = UIWindow()
-        window.rootViewController = sut
-        window.makeKeyAndVisible()
-        window.layoutIfNeeded()
+        
+        setWindowsRootViewController(sut)
+        
         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
 
         loader.completeFeedLoading(at: 0)
@@ -65,10 +61,8 @@ final class FeedViewControllerTests: XCTestCase {
         let image3 = makeImage(description: nil, location: nil)
         let (sut, loader) = makeSUT()
         
-        let window = UIWindow()
-        window.rootViewController = sut
-        window.makeKeyAndVisible()
-        window.layoutIfNeeded()
+        setWindowsRootViewController(sut)
+
         assertThat(sut, isRendering: [])
 
         loader.completeFeedLoading(with: [image0], at: 0)
@@ -83,10 +77,8 @@ final class FeedViewControllerTests: XCTestCase {
         let image0 = makeImage()
         let (sut, loader) = makeSUT()
         
-        let window = UIWindow()
-        window.rootViewController = sut
-        window.makeKeyAndVisible()
-        window.layoutIfNeeded()
+        setWindowsRootViewController(sut)
+
         loader.completeFeedLoading(with: [image0], at: 0)
         assertThat(sut, isRendering: [image0])
 
@@ -100,10 +92,8 @@ final class FeedViewControllerTests: XCTestCase {
         let image1 = makeImage(url: URL(string: "http://url-1.com")!)
         let (sut, loader) = makeSUT()
                 
-        let window = UIWindow()
-        window.rootViewController = sut
-        window.makeKeyAndVisible()
-        window.layoutIfNeeded()
+        setWindowsRootViewController(sut)
+
         loader.completeFeedLoading(with: [image0, image1])
         
         XCTAssertEqual(loader.loadedImageURLs, [], "Expected no image URL requests until views become visible")
@@ -119,10 +109,8 @@ final class FeedViewControllerTests: XCTestCase {
         let image1 = makeImage(url: URL(string: "http://url-1.com")!)
         let (sut, loader) = makeSUT()
                 
-        let window = UIWindow()
-        window.rootViewController = sut
-        window.makeKeyAndVisible()
-        window.layoutIfNeeded()
+        setWindowsRootViewController(sut)
+
         loader.completeFeedLoading(with: [image0, image1])
         XCTAssertEqual(loader.cancelledImageURLs, [], "Expected no cancelled image URL requests until image is not visible")
         
@@ -136,10 +124,8 @@ final class FeedViewControllerTests: XCTestCase {
     func test_feedImageViewLoadingIndicator_isVisibleWhileLoadingImage() {
         let (sut, loader) = makeSUT()
                 
-        let window = UIWindow()
-        window.rootViewController = sut
-        window.makeKeyAndVisible()
-        window.layoutIfNeeded()
+        setWindowsRootViewController(sut)
+
         loader.completeFeedLoading(with: [makeImage(), makeImage()])
         
         let view0 = sut.simulateFeedImageViewVisible(at: 0)
@@ -159,10 +145,8 @@ final class FeedViewControllerTests: XCTestCase {
     func test_feedImageView_rendersImageLoadedFromURL() {
         let (sut, loader) = makeSUT()
         
-        let window = UIWindow()
-        window.rootViewController = sut
-        window.makeKeyAndVisible()
-        window.layoutIfNeeded()
+        setWindowsRootViewController(sut)
+
         loader.completeFeedLoading(with: [makeImage(), makeImage()])
         
         let view0 = sut.simulateFeedImageViewVisible(at: 0)
@@ -190,10 +174,8 @@ final class FeedViewControllerTests: XCTestCase {
     func test_feedImageViewRetryButton_isVisibleOnImageURLLoadError() {
         let (sut, loader) = makeSUT()
         
-        let window = UIWindow()
-        window.rootViewController = sut
-        window.makeKeyAndVisible()
-        window.layoutIfNeeded()
+        setWindowsRootViewController(sut)
+        
         loader.completeFeedLoading(with: [makeImage(), makeImage()])
         
         let view0 = sut.simulateFeedImageViewVisible(at: 0)
@@ -213,6 +195,22 @@ final class FeedViewControllerTests: XCTestCase {
         XCTAssertEqual(view1?.isShowingRetryAction, true, "Expected retry action for second view once second image loading completes with error")
     }
     
+    func test_feedImageViewRetryButton_isVisibleOnInvalidImageData() {
+        let (sut, loader) = makeSUT()
+        
+        setWindowsRootViewController(sut)
+        
+        loader.completeFeedLoading(with: [makeImage()])
+        
+        let view = sut.simulateFeedImageViewVisible(at: 0)
+        XCTAssertEqual(view?.isShowingRetryAction, false, "Expected no retry action while loading image")
+        
+        let invalidImageData = Data("invalid image data".utf8)
+        loader.completeImageLoading(with: invalidImageData, at: 0)
+        XCTAssertEqual(view?.isShowingRetryAction, true, "Expected retry action once image loading completes with invalid image data")
+        
+    }
+   
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: FeedViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
@@ -220,6 +218,14 @@ final class FeedViewControllerTests: XCTestCase {
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, loader)
+    }
+    
+    private func setWindowsRootViewController(_ sut: FeedViewController, file: StaticString = #file, line: UInt = #line) {
+        let window = UIWindow()
+        window.rootViewController = sut
+        window.makeKeyAndVisible()
+        window.layoutIfNeeded()
+        trackForMemoryLeaks(window, file: file, line: line)
     }
 
     private func assertThat(_ sut: FeedViewController, isRendering feed: [FeedImage], file: StaticString = #file, line: UInt = #line) {
