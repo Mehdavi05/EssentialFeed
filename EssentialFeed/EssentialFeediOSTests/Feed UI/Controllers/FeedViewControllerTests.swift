@@ -13,15 +13,14 @@ final class FeedViewControllerTests: XCTestCase {
         
         /* Some Explainations to the methods used below
          :- makeKeyAndVisible()
-         This makes the window the key window and visible on the screen. The key window is the main window that receives user input. This step is necessary to ensure that
-         the view controller and its view hierarchy are fully set up for rendering.
+         This makes the window the key window and visible on the screen. The key window is the main window that receives user input. This step is necessary to ensure that the view controller and its view hierarchy
+             are fully set up for rendering.
          
          :- layoutIfNeeded()
-         This forces the window and its views to layout immediately. In testing, this is essential to ensure that the view controller's view and its subviews are fully
-         laid out before any assertions. It synchronizes layout updates, so you can reliably inspect the view’s frame, bounds, or other properties.
+         This forces the window and its views to layout immediately. In testing, this is essential to ensure that the view controller's view and its subviews are fully laid out before any assertions. It synchronizes layout updates, so you can reliably inspect the view’s frame, bounds, or other properties.
          */
+        
         setWindowsRootViewController(sut)
-
         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
         
         sut.simulateUserInitiatedFeedReload()
@@ -271,7 +270,7 @@ final class FeedViewControllerTests: XCTestCase {
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: FeedViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
-        let sut = FeedViewController(feedLoader: loader, imageLoader: loader)
+        let sut = FeedUIComposer.feedComposedWith(feedLoader: loader, imageLoader: loader)
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         return (sut, loader)
