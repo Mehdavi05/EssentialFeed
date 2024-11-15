@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--My Feed-->
+        <!--Feed View Controller-->
         <scene sceneID="qNy-yU-JkJ">
             <objects>
-                <tableViewController id="d84-yA-eVO" userLabel="My Feed" customClass="FeedViewController" customModule="EssentialFeediOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="d84-yA-eVO" userLabel="Feed View Controller" customClass="FeedViewController" customModule="EssentialFeediOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="ima-Bh-Rjf">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -130,6 +130,7 @@
                         <connections>
                             <outlet property="dataSource" destination="d84-yA-eVO" id="cXy-W7-cOV"/>
                             <outlet property="delegate" destination="d84-yA-eVO" id="Lr9-62-5TH"/>
+                            <outlet property="prefetchDataSource" destination="d84-yA-eVO" id="xG9-1r-sYi"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="5WP-go-l2K"/>
