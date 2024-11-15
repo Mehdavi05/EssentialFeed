@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yD1-gI-xfr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="d84-yA-eVO">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
@@ -70,13 +70,25 @@
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X93-gH-I3r">
                                                             <rect key="frame" x="0.0" y="0.0" width="353" height="353"/>
                                                         </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="74W-iL-pft">
+                                                            <rect key="frame" x="0.0" y="0.0" width="353" height="353"/>
+                                                            <state key="normal" title="Button"/>
+                                                            <buttonConfiguration key="configuration" style="plain" title="↻">
+                                                                <fontDescription key="titleFontDescription" type="boldSystem" pointSize="60"/>
+                                                                <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </buttonConfiguration>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstItem="X93-gH-I3r" firstAttribute="leading" secondItem="Abb-or-eB7" secondAttribute="leading" id="1dP-Nj-PAS"/>
+                                                        <constraint firstAttribute="bottom" secondItem="74W-iL-pft" secondAttribute="bottom" id="7kU-a4-SIt"/>
                                                         <constraint firstAttribute="bottom" secondItem="X93-gH-I3r" secondAttribute="bottom" id="Ev2-uD-TEe"/>
+                                                        <constraint firstAttribute="trailing" secondItem="74W-iL-pft" secondAttribute="trailing" id="Sa5-Bp-Oh2"/>
+                                                        <constraint firstItem="74W-iL-pft" firstAttribute="top" secondItem="Abb-or-eB7" secondAttribute="top" id="cqo-fh-mjD"/>
                                                         <constraint firstAttribute="trailing" secondItem="X93-gH-I3r" secondAttribute="trailing" id="eoe-Il-PbD"/>
                                                         <constraint firstItem="X93-gH-I3r" firstAttribute="top" secondItem="Abb-or-eB7" secondAttribute="top" id="jxa-Tl-LvL"/>
+                                                        <constraint firstItem="74W-iL-pft" firstAttribute="leading" secondItem="Abb-or-eB7" secondAttribute="leading" id="tYl-97-N2y"/>
                                                         <constraint firstAttribute="width" secondItem="Abb-or-eB7" secondAttribute="height" multiplier="1:1" id="vyh-PU-oGF"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
@@ -131,25 +143,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="06r-ff-JeB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="707.63358778625957" y="-242.25352112676057"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="sS3-rn-7ek">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yD1-gI-xfr" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CAD-Fe-up1">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="d84-yA-eVO" kind="relationship" relationship="rootViewController" id="Dgy-NS-ejv"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="CaQ-5G-nGm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-216.03053435114504" y="-242.25352112676057"/>
+            <point key="canvasLocation" x="114" y="-327"/>
         </scene>
     </scenes>
     <resources>
