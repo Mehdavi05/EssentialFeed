@@ -16,16 +16,20 @@ final class FeedViewModel {
         self.feedLoader = feedLoader
     }
     
-    var onLoadingStateChange: ((Bool) -> Void)?
+    var onChange: ((FeedViewModel) -> Void)?
     var onFeedLoad: (([FeedImage]) -> Void)?
     
+    private(set) var isLoading: Bool = false {
+        didSet { onChange?(self)}
+    }
+    
     func loadFeed() {
-        onLoadingStateChange?(true)
+        isLoading = true
         feedLoader.load { [weak self] result in
             if let feed = try? result.get() {
                 self?.onFeedLoad?(feed)
             }
-            self?.onLoadingStateChange?(false)
+            self?.isLoading = false
         }
     }
 }

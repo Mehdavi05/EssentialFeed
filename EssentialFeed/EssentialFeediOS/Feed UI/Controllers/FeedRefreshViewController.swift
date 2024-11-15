@@ -23,12 +23,12 @@ final public class FeedRefreshViewController: NSObject {
     }
     
     private func binded(_ view: UIRefreshControl) -> UIRefreshControl {
-        viewModel.onLoadingStateChange = { [weak view] isLoading in
-            if isLoading {
-                view?.beginRefreshing()
+        viewModel.onChange = { [weak self] viewModel in
+            if viewModel.isLoading {
+                self?.view.beginRefreshing()
             }
             else {
-                view?.endRefreshing()
+                self?.view.endRefreshing()
             }
         }
         view.addTarget(self, action: #selector(refresh), for: .valueChanged)
