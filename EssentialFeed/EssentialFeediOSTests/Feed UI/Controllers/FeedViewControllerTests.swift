@@ -9,7 +9,6 @@ final class FeedViewControllerTests: XCTestCase {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
-        //sut.replaceRefreshControlWithFakeForiOS17Support()
         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
         
         /* Some Explainations to the methods used below
@@ -268,6 +267,18 @@ final class FeedViewControllerTests: XCTestCase {
         XCTAssertEqual(loader.cancelledImageURLs, [image0.url, image1.url], "Expected second cancelled image URL request once second image is not near visible anymore")
     }
     
+    func test_feedImageView_doesNotRenderLoadedImageWhenNotVisibleAnymore() {
+        let (sut, loader) = makeSUT()
+
+        setWindowsRootViewController(sut)
+        
+        loader.completeFeedLoading(with: [makeImage()])
+        let view = sut.simulateFeedImageViewNotVisible(at: 0)
+        loader.completeImageLoading(with: anyImageData())
+        
+        XCTAssertNil(view?.renderedImage, "Expected no rendered image when an image load finishes after the view is not visible anymore")
+    }
+    
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: FeedViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
@@ -289,34 +300,8 @@ final class FeedViewControllerTests: XCTestCase {
     private func makeImage(description: String? = nil, location: String? = nil, url: URL = URL(string: "http://any-url.com")!) -> FeedImage {
         return FeedImage(id: UUID(), description: description, location: location, url: url)
     }
-}
-
-private extension FeedViewController {
-    func replaceRefreshControlWithFakeForiOS17Support()
-    {
-        let fake = FakeRefreshViewControl()
-        refreshControl?.allTargets.forEach{ target in
-            refreshControl?.actions(forTarget: target, forControlEvent: .valueChanged)?.forEach({ action in
-                fake.addTarget(target, action: Selector(action), for: .valueChanged)
-            })
-        }
-        refreshControl = fake
-    }
-}
-
-private class FakeRefreshViewControl: UIRefreshControl
-{
-    private var _isRefreshing: Bool = false
     
-    override var isRefreshing: Bool{ _isRefreshing }
-    
-    override func beginRefreshing()
-    {
-        _isRefreshing = true
-    }
-    
-    override func endRefreshing()
-    {
-        _isRefreshing = false
+    private func anyImageData() -> Data {
+        return UIImage.make(withColor: .red).pngData()!
     }
 }
