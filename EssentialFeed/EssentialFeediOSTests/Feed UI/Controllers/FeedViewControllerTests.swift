@@ -281,6 +281,7 @@ final class FeedViewControllerTests: XCTestCase {
         window.rootViewController = sut
         window.makeKeyAndVisible()
         window.layoutIfNeeded()
+        
         trackForMemoryLeaks(window, file: file, line: line)
     }
     
