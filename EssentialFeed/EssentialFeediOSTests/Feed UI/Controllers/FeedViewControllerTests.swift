@@ -9,6 +9,7 @@ final class FeedViewControllerTests: XCTestCase {
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
+        //sut.replaceRefreshControlWithFakeForiOS17Support()
         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
         
         /* Some Explainations to the methods used below
@@ -24,7 +25,7 @@ final class FeedViewControllerTests: XCTestCase {
         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
         
         sut.simulateUserInitiatedFeedReload()
-        XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
+        XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator on feed reload")
         
         loader.completeFeedLoading(at: 0)
         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
@@ -287,5 +288,35 @@ final class FeedViewControllerTests: XCTestCase {
     
     private func makeImage(description: String? = nil, location: String? = nil, url: URL = URL(string: "http://any-url.com")!) -> FeedImage {
         return FeedImage(id: UUID(), description: description, location: location, url: url)
+    }
+}
+
+private extension FeedViewController {
+    func replaceRefreshControlWithFakeForiOS17Support()
+    {
+        let fake = FakeRefreshViewControl()
+        refreshControl?.allTargets.forEach{ target in
+            refreshControl?.actions(forTarget: target, forControlEvent: .valueChanged)?.forEach({ action in
+                fake.addTarget(target, action: Selector(action), for: .valueChanged)
+            })
+        }
+        refreshControl = fake
+    }
+}
+
+private class FakeRefreshViewControl: UIRefreshControl
+{
+    private var _isRefreshing: Bool = false
+    
+    override var isRefreshing: Bool{ _isRefreshing }
+    
+    override func beginRefreshing()
+    {
+        _isRefreshing = true
+    }
+    
+    override func endRefreshing()
+    {
+        _isRefreshing = false
     }
 }

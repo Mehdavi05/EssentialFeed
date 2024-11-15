@@ -137,7 +137,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
-                            <action selector="refresh" destination="d84-yA-eVO" eventType="valueChanged" id="eK6-Q5-soC"/>
+                            <action selector="refresh" destination="d84-yA-eVO" eventType="valueChanged" id="mtJ-0S-Z78"/>
                         </connections>
                     </refreshControl>
                 </tableViewController>
