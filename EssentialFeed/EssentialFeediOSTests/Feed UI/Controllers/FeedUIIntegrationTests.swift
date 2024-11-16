@@ -4,7 +4,7 @@ import EssentialFeed
 import EssentialFeediOS
 
 final class FeedUIIntegrationTests: XCTestCase {
-
+    
     func test_loadFeedActions_requestFeedFromLoader() {
         let (sut, loader) = makeSUT()
         
@@ -300,12 +300,31 @@ final class FeedUIIntegrationTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
     }
     
+    func test_loadImageDataCompletion_dispatchesFromBackgroundToMainThread() {
+        let (sut, loader) = makeSUT()
+        
+        setWindowsRootViewController(sut)
+                
+        loader.completeFeedLoading(with: [makeImage()])
+        _ = sut.simulateFeedImageViewVisible(at: 0)
+                
+        let exp = expectation(description: "Wait for background queue")
+        DispatchQueue.global().async {
+            loader.completeImageLoading(with: self.anyImageData(), at: 0)
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 1.0)
+    }
+    
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: FeedViewController, loader: LoaderSpy) {
         let loader = LoaderSpy()
         let sut = FeedUIComposer.feedComposedWith(feedLoader: loader, imageLoader: loader)
+        
         trackForMemoryLeaks(loader, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
+        
         return (sut, loader)
     }
     
@@ -325,4 +344,9 @@ final class FeedUIIntegrationTests: XCTestCase {
     private func anyImageData() -> Data {
         return UIImage.make(withColor: .red).pngData()!
     }
+    
+    private func removeWindowsRootViewController(){
+        
+    }
+
 }
