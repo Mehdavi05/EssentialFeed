@@ -300,6 +300,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
     }
     
+    //SHU: Test with problems, detachting memory leaks XCTAssertNil failed: "EssentialFeediOSTests.FeedUIIntegrationTests.LoaderSpy" - Instance should have been deallocated. Potential memory leak.""
     func test_loadImageDataCompletion_dispatchesFromBackgroundToMainThread() {
         let (sut, loader) = makeSUT()
         
