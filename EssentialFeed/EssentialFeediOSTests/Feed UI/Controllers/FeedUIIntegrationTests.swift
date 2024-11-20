@@ -329,9 +329,6 @@ final class FeedUIIntegrationTests: XCTestCase {
         
         sut.simulateUserInitiatedFeedReload()
         XCTAssertEqual(sut.errorMessage, nil)
-        
-        sut.simulateUserInitiatedFeedReload()
-        XCTAssertEqual(sut.errorMessage, nil)
     }
     
     // MARK: - Helpers
