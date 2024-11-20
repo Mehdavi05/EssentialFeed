@@ -36,6 +36,9 @@
                                 <constraint firstItem="DVM-wE-phO" firstAttribute="top" secondItem="QgQ-zl-kGa" secondAttribute="top" constant="8" id="ge7-Cg-6bI"/>
                                 <constraint firstAttribute="trailingMargin" secondItem="DVM-wE-phO" secondAttribute="trailing" id="o7n-Pg-pBf"/>
                             </constraints>
+                            <connections>
+                                <outlet property="label" destination="DVM-wE-phO" id="RAO-M7-Mos"/>
+                            </connections>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="2Qu-V5-9Jw">
                             <rect key="frame" x="0.0" y="692" width="393" height="16"/>
