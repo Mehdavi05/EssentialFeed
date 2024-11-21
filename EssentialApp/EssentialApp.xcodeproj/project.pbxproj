@@ -82,6 +82,11 @@
 			path = EssentialAppUITests;
 			sourceTree = "<group>";
 		};
+		E03EBED52CEEDD7900DD6782 /* TestPlans */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TestPlans;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +119,7 @@
 		E03EB5532CEE8EC400DD6782 = {
 			isa = PBXGroup;
 			children = (
+				E03EBED52CEEDD7900DD6782 /* TestPlans */,
 				E03EB55E2CEE8EC400DD6782 /* EssentialApp */,
 				E03EB5752CEE8EC600DD6782 /* EssentialAppTests */,
 				E03EB57F2CEE8EC600DD6782 /* EssentialAppUITests */,
@@ -159,6 +165,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				E03EB55E2CEE8EC400DD6782 /* EssentialApp */,
+				E03EBED52CEEDD7900DD6782 /* TestPlans */,
 			);
 			name = EssentialApp;
 			packageProductDependencies = (
