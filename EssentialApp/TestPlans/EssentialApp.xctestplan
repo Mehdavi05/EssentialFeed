@@ -33,14 +33,6 @@
         "identifier" : "E03EB5712CEE8EC600DD6782",
         "name" : "EssentialAppTests"
       }
-    },
-    {
-      "parallelizable" : true,
-      "target" : {
-        "containerPath" : "container:EssentialApp.xcodeproj",
-        "identifier" : "E03EB57B2CEE8EC600DD6782",
-        "name" : "EssentialAppUITests"
-      }
     }
   ],
   "version" : 1
