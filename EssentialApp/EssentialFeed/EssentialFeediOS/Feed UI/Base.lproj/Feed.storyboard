@@ -87,8 +87,9 @@
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Abb-or-eB7" userLabel="Image Container">
                                                     <rect key="frame" x="0.0" y="81.333333333333314" width="353" height="353"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X93-gH-I3r">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="feed-image-view" translatesAutoresizingMaskIntoConstraints="NO" id="X93-gH-I3r">
                                                             <rect key="frame" x="0.0" y="0.0" width="353" height="353"/>
+                                                            <accessibility key="accessibilityConfiguration" identifier="feed-image-view"/>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="74W-iL-pft">
                                                             <rect key="frame" x="0.0" y="0.0" width="353" height="353"/>
@@ -141,6 +142,7 @@
                                         <constraint firstItem="OnO-Bc-Zsw" firstAttribute="leading" secondItem="fbD-pV-s8F" secondAttribute="leadingMargin" id="ySk-cq-aSE"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <accessibility key="accessibilityConfiguration" identifier="feed-image-cell"/>
                                 <connections>
                                     <outlet property="descriptionLabel" destination="sJ8-5Y-FBw" id="QaI-5l-FtD"/>
                                     <outlet property="feedImageContainer" destination="Abb-or-eB7" id="Z9q-kb-X2V"/>
