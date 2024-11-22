@@ -9,7 +9,6 @@ import XCTest
 import EssentialFeed
 import EssentialApp
 
-
 class FeedLoaderWithFallbackCompositeTests: XCTestCase, FeedLoaderTestCase {
     
     func test_load_deliversPrimaryFeedOnPrimaryLoaderSuccess() {

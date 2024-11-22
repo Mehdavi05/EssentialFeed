@@ -74,8 +74,6 @@
 		E0740F782CC8072200C3F636 /* EssentialFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E09A9FBA2CDBF9CE000B0D06 /* EssentialFeediOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EssentialFeediOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E09A9FC32CDBF9CE000B0D06 /* EssentialFeediOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeediOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E09A9FD32CDBFAA2000B0D06 /* EssentialFeediOS.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = EssentialFeediOS.xctestplan; path = EssentialFeediOSTests/TestPlans/EssentialFeediOS.xctestplan; sourceTree = "<group>"; };
-		E09A9FD62CDBFCEB000B0D06 /* CI_iOS.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = CI_iOS.xctestplan; path = EssentialFeediOSTests/TestPlans/CI_iOS.xctestplan; sourceTree = "<group>"; };
 		E0F66D262CD8AB4600DD1A1C /* EssentialFeedAPIEndToEndTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeedAPIEndToEndTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F66D3D2CD8B3A400DD1A1C /* APIEndToEnd+UnitTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "APIEndToEnd+UnitTests.xctestplan"; sourceTree = "<group>"; };
 		E0F66E0D2CDB501E00DD1A1C /* EssentialFeedCacheIntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeedCacheIntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,17 +81,9 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		E03EB3AB2CEDFA6100DD6782 /* Exceptions for "EssentialFeedTests" folder in "EssentialFeedTests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"Feed Presentation/FeedLocalizationTests.swift",
-			);
-			target = E0740F772CC8072200C3F636 /* EssentialFeedTests */;
-		};
 		E09AA0482CDC099A000B0D06 /* Exceptions for "EssentialFeedTests" folder in "EssentialFeediOSTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"Feed Presentation/FeedLocalizationTests.swift",
 				"Helpers/XCTestCase+MemoryLeakTracking.swift",
 			);
 			target = E09A9FC22CDBF9CE000B0D06 /* EssentialFeediOSTests */;
@@ -126,7 +116,6 @@
 		E0740F7C2CC8072200C3F636 /* EssentialFeedTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				E03EB3AB2CEDFA6100DD6782 /* Exceptions for "EssentialFeedTests" folder in "EssentialFeedTests" target */,
 				E0F66D312CD8AE1600DD1A1C /* Exceptions for "EssentialFeedTests" folder in "EssentialFeedAPIEndToEndTests" target */,
 				E0F66E192CDB523E00DD1A1C /* Exceptions for "EssentialFeedTests" folder in "EssentialFeedCacheIntegrationTests" target */,
 				E09AA0482CDC099A000B0D06 /* Exceptions for "EssentialFeedTests" folder in "EssentialFeediOSTests" target */,
@@ -219,10 +208,8 @@
 			children = (
 				E03EBC232CEED9A900DD6782 /* EssentialFeed+Random+CodeCoverage.xctestplan */,
 				E03EBC222CEED76C00DD6782 /* EssentialFeedAPIEndToEndTests.xctestplan */,
-				E09A9FD32CDBFAA2000B0D06 /* EssentialFeediOS.xctestplan */,
 				E0F66E172CDB506F00DD1A1C /* EssentialFeedCacheIntegrationTests.xctestplan */,
 				E0F66D3D2CD8B3A400DD1A1C /* APIEndToEnd+UnitTests.xctestplan */,
-				E09A9FD62CDBFCEB000B0D06 /* CI_iOS.xctestplan */,
 				E0740F702CC8072100C3F636 /* EssentialFeed */,
 				E0740F7C2CC8072200C3F636 /* EssentialFeedTests */,
 				E0F66D272CD8AB4600DD1A1C /* EssentialFeedAPIEndToEndTests */,

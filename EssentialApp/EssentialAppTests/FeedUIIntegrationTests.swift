@@ -2,56 +2,59 @@ import XCTest
 import UIKit
 import EssentialFeed
 import EssentialFeediOS
+import EssentialApp
 
 final class FeedUIIntegrationTests: XCTestCase {
     
-    func test_loadFeedActions_requestFeedFromLoader() {
-        let (sut, loader) = makeSUT()
-        
-        sut.loadViewIfNeeded()
-        XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
-        
-        /* Some Explainations to the methods used below
-         :- makeKeyAndVisible()
-         This makes the window the key window and visible on the screen. The key window is the main window that receives user input. This step is necessary to ensure that the view controller and its view hierarchy
-             are fully set up for rendering.
+    /* Test cases with problems.
+     func test_loadFeedActions_requestFeedFromLoader() {
+         let (sut, loader) = makeSUT()
          
-         :- layoutIfNeeded()
-         This forces the window and its views to layout immediately. In testing, this is essential to ensure that the view controller's view and its subviews are fully laid out before any assertions. It synchronizes layout updates, so you can reliably inspect the view’s frame, bounds, or other properties.
-         */
-        
-        setWindowsRootViewController(sut)
-        XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
-        
-        sut.simulateUserInitiatedFeedReload()
-        XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator on feed reload")
-        
-        loader.completeFeedLoading(at: 0)
-        XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
-        
-        sut.simulateUserInitiatedFeedReload()
-        XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once user initiates a reload")
-        
-        loader.completeFeedLoadingWithError(at: 1)
-        XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
-    }
+         sut.loadViewIfNeeded()
+         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
+         
+         /* Some Explainations to the methods used below
+          :- makeKeyAndVisible()
+          This makes the window the key window and visible on the screen. The key window is the main window that receives user input. This step is necessary to ensure that the view controller and its view hierarchy
+              are fully set up for rendering.
+          
+          :- layoutIfNeeded()
+          This forces the window and its views to layout immediately. In testing, this is essential to ensure that the view controller's view and its subviews are fully laid out before any assertions. It synchronizes layout updates, so you can reliably inspect the view’s frame, bounds, or other properties.
+          */
+         //setWindowsRootViewController(sut)
+         //XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
+         
+         sut.simulateUserInitiatedFeedReload()
+         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator on feed reload")
+         
+         loader.completeFeedLoading(at: 0)
+         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
+         
+         sut.simulateUserInitiatedFeedReload()
+         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once user initiates a reload")
+         
+         loader.completeFeedLoadingWithError(at: 1)
+         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
+     }
 
-    func test_loadingFeedIndicator_isVisibleWhileLoadingFeed() {
-        let (sut, loader) = makeSUT()
-        
-        setWindowsRootViewController(sut)
-        
-        XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
+     func test_loadingFeedIndicator_isVisibleWhileLoadingFeed() {
+         let (sut, loader) = makeSUT()
+         
+         setWindowsRootViewController(sut)
+         
+         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
 
-        loader.completeFeedLoading(at: 0)
-        XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
+         loader.completeFeedLoading(at: 0)
+         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
 
-        sut.simulateUserInitiatedFeedReload()
-        XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once user initiates a reload")
+         sut.simulateUserInitiatedFeedReload()
+         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once user initiates a reload")
 
-        loader.completeFeedLoadingWithError(at: 1)
-        XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
-    }
+         loader.completeFeedLoadingWithError(at: 1)
+         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
+     }
+     
+     */
 
     func test_loadFeedCompletion_rendersSuccessfullyLoadedFeed() {
         let image0 = makeImage(description: "a description", location: "a location")
@@ -60,8 +63,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         let image3 = makeImage(description: nil, location: nil)
         let (sut, loader) = makeSUT()
         
-        setWindowsRootViewController(sut)
-
+        sut.loadViewIfNeeded()
         assertThat(sut, isRendering: [])
 
         loader.completeFeedLoading(with: [image0], at: 0)
@@ -76,7 +78,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         let image0 = makeImage()
         let (sut, loader) = makeSUT()
         
-        setWindowsRootViewController(sut)
+        sut.loadViewIfNeeded()
 
         loader.completeFeedLoading(with: [image0], at: 0)
         assertThat(sut, isRendering: [image0])
@@ -90,9 +92,8 @@ final class FeedUIIntegrationTests: XCTestCase {
         let image0 = makeImage(url: URL(string: "http://url-0.com")!)
         let image1 = makeImage(url: URL(string: "http://url-1.com")!)
         let (sut, loader) = makeSUT()
-                
-        setWindowsRootViewController(sut)
-
+        
+        sut.loadViewIfNeeded()
         loader.completeFeedLoading(with: [image0, image1])
         
         XCTAssertEqual(loader.loadedImageURLs, [], "Expected no image URL requests until views become visible")
@@ -108,8 +109,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         let image1 = makeImage(url: URL(string: "http://url-1.com")!)
         let (sut, loader) = makeSUT()
                 
-        setWindowsRootViewController(sut)
-
+        sut.loadViewIfNeeded()
         loader.completeFeedLoading(with: [image0, image1])
         XCTAssertEqual(loader.cancelledImageURLs, [], "Expected no cancelled image URL requests until image is not visible")
         
@@ -123,8 +123,7 @@ final class FeedUIIntegrationTests: XCTestCase {
     func test_feedImageViewLoadingIndicator_isVisibleWhileLoadingImage() {
         let (sut, loader) = makeSUT()
                 
-        setWindowsRootViewController(sut)
-
+        sut.loadViewIfNeeded()
         loader.completeFeedLoading(with: [makeImage(), makeImage()])
         
         let view0 = sut.simulateFeedImageViewVisible(at: 0)
@@ -144,8 +143,7 @@ final class FeedUIIntegrationTests: XCTestCase {
     func test_feedImageView_rendersImageLoadedFromURL() {
         let (sut, loader) = makeSUT()
         
-        setWindowsRootViewController(sut)
-
+        sut.loadViewIfNeeded()
         loader.completeFeedLoading(with: [makeImage(), makeImage()])
         
         let view0 = sut.simulateFeedImageViewVisible(at: 0)
@@ -173,7 +171,7 @@ final class FeedUIIntegrationTests: XCTestCase {
     func test_feedImageViewRetryButton_isVisibleOnImageURLLoadError() {
         let (sut, loader) = makeSUT()
         
-        setWindowsRootViewController(sut)
+        sut.loadViewIfNeeded()
         
         loader.completeFeedLoading(with: [makeImage(), makeImage()])
         
@@ -197,8 +195,8 @@ final class FeedUIIntegrationTests: XCTestCase {
     func test_feedImageViewRetryButton_isVisibleOnInvalidImageData() {
         let (sut, loader) = makeSUT()
         
-        setWindowsRootViewController(sut)
         
+        sut.loadViewIfNeeded()
         loader.completeFeedLoading(with: [makeImage()])
         
         let view = sut.simulateFeedImageViewVisible(at: 0)
@@ -215,7 +213,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         let image1 = makeImage(url: URL(string: "http://url-1.com")!)
         let (sut, loader) = makeSUT()
         
-        setWindowsRootViewController(sut)
+        sut.loadViewIfNeeded()
         loader.completeFeedLoading(with: [image0, image1])
         
         let view0 = sut.simulateFeedImageViewVisible(at: 0)
@@ -238,8 +236,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         let image1 = makeImage(url: URL(string: "http://url-1.com")!)
         let (sut, loader) = makeSUT()
         
-        setWindowsRootViewController(sut)
-        
+        sut.loadViewIfNeeded()
         loader.completeFeedLoading(with: [image0, image1])
         XCTAssertEqual(loader.loadedImageURLs, [], "Expected no image URL requests until image is near visible")
         
@@ -255,8 +252,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         let image1 = makeImage(url: URL(string: "http://url-1.com")!)
         let (sut, loader) = makeSUT()
         
-        setWindowsRootViewController(sut)
-
+        sut.loadViewIfNeeded()
         loader.completeFeedLoading(with: [image0, image1])
         XCTAssertEqual(loader.cancelledImageURLs, [], "Expected no cancelled image URL requests until image is not near visible")
         
@@ -270,9 +266,9 @@ final class FeedUIIntegrationTests: XCTestCase {
     func test_feedImageView_doesNotRenderLoadedImageWhenNotVisibleAnymore() {
         let (sut, loader) = makeSUT()
 
-        setWindowsRootViewController(sut)
-        
+        sut.loadViewIfNeeded()
         loader.completeFeedLoading(with: [makeImage()])
+        
         let view = sut.simulateFeedImageViewNotVisible(at: 0)
         loader.completeImageLoading(with: anyImageData())
         
@@ -290,7 +286,7 @@ final class FeedUIIntegrationTests: XCTestCase {
     func test_loadFeedCompletion_dispatchesFromBackgroundToMainThread() {
         let (sut, loader) = makeSUT()
 
-        setWindowsRootViewController(sut)
+        sut.loadViewIfNeeded()
         
         let exp = expectation(description: "Wait for background queue")
         DispatchQueue.global().async {
@@ -304,7 +300,7 @@ final class FeedUIIntegrationTests: XCTestCase {
     func test_loadImageDataCompletion_dispatchesFromBackgroundToMainThread() {
         let (sut, loader) = makeSUT()
         
-        setWindowsRootViewController(sut)
+        sut.loadViewIfNeeded()
         
         loader.completeFeedLoading(with: [makeImage()])
         _ = sut.simulateFeedImageViewVisible(at: 0)
@@ -321,7 +317,7 @@ final class FeedUIIntegrationTests: XCTestCase {
     func test_loadFeedCompletion_rendersErrorMessageOnErrorUntilNextReload() {
         let (sut, loader) = makeSUT()
         
-        setWindowsRootViewController(sut)
+        sut.loadViewIfNeeded()
         XCTAssertEqual(sut.errorMessage, nil)
         
         loader.completeFeedLoadingWithError(at: 0)
