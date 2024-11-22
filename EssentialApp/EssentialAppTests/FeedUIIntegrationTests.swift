@@ -6,56 +6,40 @@ import EssentialApp
 
 final class FeedUIIntegrationTests: XCTestCase {
     
-    /* Test cases with problems.
-     func test_loadFeedActions_requestFeedFromLoader() {
-         let (sut, loader) = makeSUT()
-         
-         sut.loadViewIfNeeded()
-         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
-         
-         /* Some Explainations to the methods used below
-          :- makeKeyAndVisible()
-          This makes the window the key window and visible on the screen. The key window is the main window that receives user input. This step is necessary to ensure that the view controller and its view hierarchy
-              are fully set up for rendering.
-          
-          :- layoutIfNeeded()
-          This forces the window and its views to layout immediately. In testing, this is essential to ensure that the view controller's view and its subviews are fully laid out before any assertions. It synchronizes layout updates, so you can reliably inspect the view’s frame, bounds, or other properties.
-          */
-         //setWindowsRootViewController(sut)
-         //XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
-         
-         sut.simulateUserInitiatedFeedReload()
-         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator on feed reload")
-         
-         loader.completeFeedLoading(at: 0)
-         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
-         
-         sut.simulateUserInitiatedFeedReload()
-         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once user initiates a reload")
-         
-         loader.completeFeedLoadingWithError(at: 1)
-         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
-     }
-
-     func test_loadingFeedIndicator_isVisibleWhileLoadingFeed() {
-         let (sut, loader) = makeSUT()
-         
-         setWindowsRootViewController(sut)
-         
-         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
-
-         loader.completeFeedLoading(at: 0)
-         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
-
-         sut.simulateUserInitiatedFeedReload()
-         XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once user initiates a reload")
-
-         loader.completeFeedLoadingWithError(at: 1)
-         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
-     }
-     
+    func test_loadFeedActions_requestFeedFromLoader() {
+        let (sut, loader) = makeSUT()
+        XCTAssertEqual(loader.loadFeedCallCount, 0, "Expected no loading requests before view is loaded")
+        
+        sut.loadViewIfNeeded()
+        XCTAssertEqual(loader.loadFeedCallCount, 1, "Expected a loading request once view is loaded")
+        
+        sut.simulateUserInitiatedFeedReload()
+        XCTAssertEqual(loader.loadFeedCallCount, 2, "Expected another loading request once user initiates a reload")
+        
+        sut.simulateUserInitiatedFeedReload()
+        XCTAssertEqual(loader.loadFeedCallCount, 3, "Expected yet another loading request once user initiates another reload")
+    }
+    
+    /*
+     https://youtu.be/n9ObNkPP5GY?si=Qafymx0JT20BaYtX
+     This test is excluded bcz of the the refresh control isRefreshing not getting set in iOS 17+. Explanation in the video on above link
      */
-
+    func test_loadingFeedIndicator_isVisibleWhileLoadingFeed() {
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once view is loaded")
+        
+        loader.completeFeedLoading(at: 0)
+        XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once loading completes successfully")
+        
+        sut.simulateUserInitiatedFeedReload()
+        XCTAssertTrue(sut.isShowingLoadingIndicator, "Expected loading indicator once user initiates a reload")
+        
+        loader.completeFeedLoadingWithError(at: 1)
+        XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
+    }
+    
     func test_loadFeedCompletion_rendersSuccessfullyLoadedFeed() {
         let image0 = makeImage(description: "a description", location: "a location")
         let image1 = makeImage(description: nil, location: "another location")
