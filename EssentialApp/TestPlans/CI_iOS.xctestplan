@@ -1,0 +1,27 @@
+{
+  "configurations" : [
+    {
+      "id" : "A8F4365E-0C7F-4BF2-8EBE-37A22763BED7",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "skippedTests" : [
+        "FeedUIIntegrationTests\/test_loadingFeedIndicator_isVisibleWhileLoadingFeed()"
+      ],
+      "target" : {
+        "containerPath" : "container:..\/EssentialApp.xcodeproj",
+        "identifier" : "E03EB5712CEE8EC600DD6782",
+        "name" : "EssentialAppTests"
+      }
+    }
+  ],
+  "version" : 1
+}

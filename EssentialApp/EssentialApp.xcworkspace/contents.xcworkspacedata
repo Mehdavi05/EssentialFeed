@@ -11,9 +11,9 @@
       location = "group:TestPlans/EssentialApp.xctestplan">
    </FileRef>
    <FileRef
-      location = "group:TestPlans/CI_App.xctestplan">
+      location = "group:TestPlans/EssentialAppUIAcceptanceTests.xctestplan">
    </FileRef>
    <FileRef
-      location = "group:TestPlans/EssentialAppUIAcceptanceTests.xctestplan">
+      location = "group:TestPlans/CI_iOS.xctestplan">
    </FileRef>
 </Workspace>
