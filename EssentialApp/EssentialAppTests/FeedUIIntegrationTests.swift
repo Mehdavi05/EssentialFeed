@@ -24,6 +24,7 @@ final class FeedUIIntegrationTests: XCTestCase {
      https://youtu.be/n9ObNkPP5GY?si=Qafymx0JT20BaYtX
      This test is excluded bcz of the the refresh control isRefreshing not getting set in iOS 17+. Explanation in the video on above link
      */
+    /*
     func test_loadingFeedIndicator_isVisibleWhileLoadingFeed() {
         let (sut, loader) = makeSUT()
         
@@ -39,6 +40,7 @@ final class FeedUIIntegrationTests: XCTestCase {
         loader.completeFeedLoadingWithError(at: 1)
         XCTAssertFalse(sut.isShowingLoadingIndicator, "Expected no loading indicator once user initiated loading completes with error")
     }
+     */
     
     func test_loadFeedCompletion_rendersSuccessfullyLoadedFeed() {
         let image0 = makeImage(description: "a description", location: "a location")
