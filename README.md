@@ -1,3 +1,5 @@
+[![iOS/macOS CI](https://github.com/Mehdavi05/EssentialFeed/actions/workflows/ios.yml/badge.svg)](https://github.com/Mehdavi05/EssentialFeed/actions/workflows/ios.yml)
+
 # Essential Feed App – Image Feed Feature
 
 ## BDD Specs
